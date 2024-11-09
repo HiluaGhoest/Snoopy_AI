@@ -1,0 +1,419 @@
+Fri Nov  8 21:56:15 2024    profile_results.prof
+
+         26008 function calls (25910 primitive calls) in 14.302 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001   14.302   14.302 .\chat_detection.py:235(main)
+        1    0.000    0.000    8.815    8.815 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:447(run)
+        4    8.811    2.203    8.811    2.203 {built-in method _winapi.WaitForSingleObject}
+        1    0.000    0.000    8.811    8.811 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:920(communicate)
+        2    0.000    0.000    8.811    4.405 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:1014(wait)
+        2    0.000    0.000    8.811    4.405 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:1250(_wait)
+        2    0.000    0.000    3.299    1.649 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\queues.py:91(get)
+        2    0.000    0.000    3.268    1.634 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:208(recv_bytes)
+        2    0.000    0.000    3.268    1.634 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:294(_recv_bytes)
+        2    3.267    1.633    3.267    1.633 {built-in method _winapi.WaitForMultipleObjects}
+        1    0.001    0.001    1.302    1.302 .\chat_detection.py:11(init_opencl)
+        1    1.274    1.274    1.274    1.274 {built-in method getDefault}
+        2    0.000    0.000    0.735    0.368 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\process.py:101(start)
+        2    0.000    0.000    0.735    0.368 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:221(_Popen)
+        2    0.000    0.000    0.735    0.368 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:319(_Popen)
+        2    0.000    0.000    0.726    0.363 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\popen_spawn_win32.py:45(__init__)
+        4    0.001    0.000    0.717    0.179 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\reduction.py:58(dump)
+        4    0.717    0.179    0.717    0.179 {method 'dump' of '_pickle.Pickler' objects}
+        1    0.000    0.000    0.034    0.034 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\pyscreeze\__init__.py:532(_screenshot_win32)
+        1    0.000    0.000    0.034    0.034 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\ImageGrab.py:27(grab)
+        1    0.032    0.032    0.032    0.032 {built-in method PIL._imaging.grabscreen_win32}
+        1    0.000    0.000    0.031    0.031 .\chat_detection.py:96(load_templates)
+        2    0.030    0.015    0.030    0.015 {built-in method _pickle.loads}
+     13/3    0.000    0.000    0.026    0.009 <frozen importlib._bootstrap>:978(_find_and_load)
+     13/3    0.000    0.000    0.026    0.009 <frozen importlib._bootstrap>:948(_find_and_load_unlocked)
+     13/3    0.000    0.000    0.025    0.008 <frozen importlib._bootstrap>:663(_load_unlocked)
+     11/3    0.000    0.000    0.025    0.008 <frozen importlib._bootstrap_external>:722(exec_module)
+        1    0.024    0.024    0.024    0.024 {haveOpenCL}
+        2    0.021    0.011    0.021    0.011 {imread}
+     19/3    0.000    0.000    0.021    0.007 <frozen importlib._bootstrap>:211(_call_with_frames_removed)
+     12/3    0.000    0.000    0.021    0.007 {built-in method builtins.exec}
+        1    0.020    0.020    0.020    0.020 {imwrite}
+        1    0.018    0.018    0.018    0.018 {cvtColor}
+        1    0.000    0.000    0.017    0.017 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:99(Queue)
+        4    0.014    0.004    0.014    0.004 {rectangle}
+        1    0.000    0.000    0.013    0.013 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\queues.py:10(<module>)
+       11    0.000    0.000    0.012    0.001 <frozen importlib._bootstrap_external>:793(get_code)
+        3    0.012    0.004    0.012    0.004 {built-in method _winapi.CreateProcess}
+    56/26    0.000    0.000    0.011    0.000 <frozen importlib._bootstrap>:1009(_handle_fromlist)
+      4/2    0.000    0.000    0.011    0.006 {built-in method builtins.__import__}
+        2    0.010    0.005    0.011    0.006 {method 'sort' of 'list' objects}
+       11    0.004    0.000    0.010    0.001 <frozen importlib._bootstrap_external>:914(get_data)
+        2    0.008    0.004    0.008    0.004 {split}
+       13    0.000    0.000    0.008    0.001 <frozen importlib._bootstrap>:576(module_from_spec)
+        1    0.000    0.000    0.008    0.008 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\popen_spawn_win32.py:1(<module>)
+        2    0.000    0.000    0.007    0.004 <frozen importlib._bootstrap_external>:1040(create_module)
+        2    0.007    0.004    0.007    0.004 {built-in method _imp.create_dynamic}
+        1    0.000    0.000    0.006    0.006 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\spawn.py:11(<module>)
+       11    0.006    0.001    0.006    0.001 {method 'read' of '_io.FileIO' objects}
+        1    0.000    0.000    0.005    0.005 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\runpy.py:8(<module>)
+        1    0.001    0.001    0.005    0.005 {built-in method numpy.array}
+        1    0.000    0.000    0.004    0.004 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:681(__init__)
+        1    0.000    0.000    0.004    0.004 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:1136(_execute_child)
+        1    0.000    0.000    0.004    0.004 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\queue.py:1(<module>)
+        1    0.000    0.000    0.004    0.004 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:686(__array_interface__)
+       13    0.000    0.000    0.004    0.000 <frozen importlib._bootstrap>:882(_find_spec)
+       13    0.000    0.000    0.004    0.000 <frozen importlib._bootstrap_external>:1272(find_spec)
+       45    0.000    0.000    0.004    0.000 <frozen importlib._bootstrap_external>:74(_path_stat)
+       13    0.000    0.000    0.004    0.000 <frozen importlib._bootstrap_external>:1240(_get_spec)
+       45    0.003    0.000    0.003    0.000 {built-in method nt.stat}
+       21    0.000    0.000    0.003    0.000 <frozen importlib._bootstrap_external>:1356(find_spec)
+        1    0.000    0.000    0.003    0.003 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:725(tobytes)
+        1    0.002    0.002    0.002    0.002 {setUseOpenCL}
+        1    0.000    0.000    0.002    0.002 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\queues.py:36(__init__)
+        1    0.000    0.000    0.002    0.002 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:2936(frombytes)
+        1    0.000    0.000    0.002    0.002 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\util.py:1(<module>)
+        2    0.002    0.001    0.002    0.001 {merge}
+        1    0.000    0.000    0.002    0.002 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:10(<module>)
+       48    0.002    0.000    0.002    0.000 {method 'encode' of 'ImagingEncoder' objects}
+        1    0.001    0.001    0.001    0.001 {method 'join' of 'bytes' objects}
+    22139    0.001    0.000    0.001    0.000 .\chat_detection.py:288(<lambda>)
+        2    0.000    0.000    0.001    0.001 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:332(_get_more_data)
+       13    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap_external>:93(_path_isfile)
+       13    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap_external>:84(_path_is_mode_type)
+       11    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap_external>:523(_compile_bytecode)
+       11    0.001    0.000    0.001    0.000 {built-in method marshal.loads}
+        1    0.000    0.000    0.001    0.001 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:803(frombytes)
+        1    0.000    0.000    0.001    0.001 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:2897(new)
+        1    0.001    0.001    0.001    0.001 {method 'decode' of 'ImagingDecoder' objects}
+        1    0.001    0.001    0.001    0.001 {built-in method PIL._imaging.fill}
+       45    0.000    0.000    0.001    0.000 {built-in method builtins.__build_class__}
+        1    0.001    0.001    0.001    0.001 {method 'name' of 'cv2.ocl.Device' objects}
+        4    0.001    0.000    0.001    0.000 {method 'write' of '_io.BytesIO' objects}
+       11    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap_external>:951(path_stats)
+        4    0.001    0.000    0.001    0.000 {built-in method _winapi.ReadFile}
+        2    0.001    0.000    0.001    0.000 {built-in method _winapi.CreatePipe}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:1(<module>)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\process.py:133(join)
+        3    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\popen_spawn_win32.py:97(wait)
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:504(_init_module_attrs)
+        1    0.000    0.000    0.000    0.000 <__array_function__ internals>:2(linspace)
+      4/1    0.000    0.000    0.000    0.000 {built-in method numpy.core._multiarray_umath.implement_array_function}
+       11    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\abc.py:125(__new__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\function_base.py:23(linspace)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:147(__enter__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:525(Pipe)
+       22    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:271(cache_from_source)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\pkgutil.py:1(<module>)
+       24    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:403(cached)
+       99    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:56(_path_join)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:157(_get_module_lock)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:369(_get_cached)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:69(arbitrary_address)
+       11    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x00007FFB8528A690}
+        8    0.000    0.000    0.000    0.000 {built-in method builtins.next}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\tempfile.py:382(mktemp)
+        3    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\tempfile.py:153(__next__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\collections\__init__.py:316(namedtuple)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:11(<module>)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:58(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\spawn.py:139(get_preparation_data)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:318(__exit__)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:946(reduce_pipe_connection)
+       28    0.000    0.000    0.000    0.000 {built-in method _thread.allocate_lock}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\util.py:10(<module>)
+        1    0.000    0.000    0.000    0.000 <__array_function__ internals>:2(any)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1351(_get_spec)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\fromnumeric.py:2268(any)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\fromnumeric.py:69(_wrapreduction)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:50(__init__)
+       99    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:58(<listcomp>)
+       12    0.000    0.000    0.000    0.000 {built-in method _winapi.CloseHandle}
+        7    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:19(_register)
+      161    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+        1    0.000    0.000    0.000    0.000 {method 'any' of 'numpy.generic' objects}
+      132    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\_methods.py:54(_any)
+       22    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:62(_path_split)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:64(Lock)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\reduction.py:102(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:114(_make_name)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\util.py:205(__call__)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:574(spec_from_file_location)
+       11    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:438(_classify_pyc)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:161(__init__)
+       54    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:416(parent)
+        3    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\tempfile.py:142(rng)
+      134    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+       24    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\abc.py:130(register)
+        3    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\tempfile.py:156(<listcomp>)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\process.py:72(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\spawn.py:78(get_command_line)
+       24    0.000    0.000    0.000    0.000 {built-in method _abc._abc_register}
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:151(__exit__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:249(_conv_type_shape)
+       24    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\random.py:256(choice)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\process.py:326(__reduce__)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\reduction.py:38(__init__)
+      116    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:222(_verbose_message)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:100(__getstate__)
+        2    0.000    0.000    0.000    0.000 {built-in method io.open}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\ImageMode.py:36(getmode)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:103(release)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:78(acquire)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\tempfile.py:84(_exists)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:84(BoundedSemaphore)
+        1    0.000    0.000    0.000    0.000 {built-in method _winapi.CreateNamedPipe}
+        2    0.000    0.000    0.000    0.000 {built-in method _winapi.PeekNamedPipe}
+        1    0.000    0.000    0.000    0.000 {built-in method nt.lstat}
+       24    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\abc.py:141(__subclasscheck__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:394(_getdecoder)
+       33    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:51(_r_long)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\random.py:88(__init__)
+       24    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\random.py:224(_randbelow)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:417(_getencoder)
+       11    0.000    0.000    0.000    0.000 {built-in method _abc._abc_init}
+        3    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\ntpath.py:75(join)
+       10    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\ntpath.py:122(splitdrive)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:144(__init__)
+      118    0.000    0.000    0.000    0.000 {method 'rpartition' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\random.py:97(seed)
+       24    0.000    0.000    0.000    0.000 {built-in method _abc._abc_subclasscheck}
+        4    0.000    0.000    0.000    0.000 {built-in method _winapi.OpenProcess}
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:176(cb)
+       11    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:471(_validate_timestamp_pyc)
+        1    0.000    0.000    0.000    0.000 {built-in method numpy.arange}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\ntpath.py:450(normpath)
+        1    0.000    0.000    0.000    0.000 {built-in method PIL._imaging.raw_encoder}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\ntpath.py:67(isabs)
+        1    0.000    0.000    0.000    0.000 {built-in method PIL._imaging.raw_decoder}
+       13    0.000    0.000    0.000    0.000 {built-in method builtins.any}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:516(list2cmdline)
+       39    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:859(__exit__)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:272(_args_from_interpreter_flags)
+      220    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 <__array_function__ internals>:2(result_type)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:130(__del__)
+      108    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+       39    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:855(__enter__)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\util.py:186(__init__)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\popen_spawn_win32.py:93(duplicate_for_child)
+        8    0.000    0.000    0.000    0.000 {built-in method _winapi.DuplicateHandle}
+       26    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1203(_path_importer_cache)
+        1    0.000    0.000    0.000    0.000 {method 'clear' of 'list' objects}
+       86    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\functools.py:763(singledispatch)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\queues.py:67(_after_fork)
+       21    0.000    0.000    0.000    0.000 {built-in method nt.getpid}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\process.py:53(_cleanup)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:276(_close)
+       18    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:346(get_spawning_popen)
+       91    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+       11    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:401(_check_name_wrapper)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:719(find_spec)
+       11    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:35(_new_module)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\queues.py:57(__getstate__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\contextlib.py:210(contextmanager)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:792(find_spec)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\functools.py:37(update_wrapper)
+        2    0.000    0.000    0.000    0.000 {function Random.seed at 0x000001F23BCE53A8}
+        6    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:352(assert_spawning)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\copyreg.py:96(_slotnames)
+       22    0.000    0.000    0.000    0.000 {method 'rsplit' of 'str' objects}
+       65    0.000    0.000    0.000    0.000 {built-in method _imp.acquire_lock}
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\reduction.py:71(duplicate)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\functools.py:804(register)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:542(_new)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:369(__init__)
+       52    0.000    0.000    0.000    0.000 {built-in method nt.fspath}
+       33    0.000    0.000    0.000    0.000 {built-in method from_bytes}
+       10    0.000    0.000    0.000    0.000 {method 'update' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\popen_spawn_win32.py:113(poll)
+       17    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:143(__init__)
+       33    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\ImageMode.py:25(__init__)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:311(__enter__)
+       21    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:36(_relax_case)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:94(__enter__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\weakref.py:102(__init__)
+        5    0.000    0.000    0.000    0.000 {method 'GetOverlappedResult' of '_winapi.Overlapped' objects}
+       65    0.000    0.000    0.000    0.000 {built-in method _imp.release_lock}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1048(exec_module)
+        5    0.000    0.000    0.000    0.000 {built-in method _imp.is_builtin}
+        1    0.000    0.000    0.000    0.000 {built-in method _winapi.CreateFile}
+        1    0.000    0.000    0.000    0.000 <__array_function__ internals>:2(ndim)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:114(_ConnectionBase)
+       52    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:321(<genexpr>)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\numerictypes.py:358(issubdtype)
+        1    0.000    0.000    0.000    0.000 {built-in method _winapi.ConnectNamedPipe}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\_collections_abc.py:816(clear)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:307(__init__)
+       11    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:884(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:97(__exit__)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\_weakrefset.py:38(_remove)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:511(__init__)
+       18    0.000    0.000    0.000    0.000 {built-in method builtins.setattr}
+       29    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        3    0.000    0.000    0.000    0.000 {built-in method _winapi.GetExitCodeProcess}
+       13    0.000    0.000    0.000    0.000 {built-in method _imp.is_frozen}
+        1    0.000    0.000    0.000    0.000 {built-in method _winapi.SetNamedPipeHandleState}
+       42    0.000    0.000    0.000    0.000 {method 'getrandbits' of '_random.Random' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\_weakrefset.py:81(add)
+        1    0.000    0.000    0.000    0.000 {method 'astype' of 'numpy.ndarray' objects}
+       11    0.000    0.000    0.000    0.000 {built-in method _imp._fix_co_filename}
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:349(set_spawning_popen)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\threading.py:216(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:360(Barrier)
+        1    0.000    0.000    0.000    0.000 {built-in method _operator.index}
+       26    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+        6    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\spawn.py:87(<genexpr>)
+        2    0.000    0.000    0.000    0.000 {built-in method msvcrt.open_osfhandle}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\fromnumeric.py:3127(ndim)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:2876(_check_size)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\numerictypes.py:284(issubclass_)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\weakref.py:476(popitem)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:168(fileno)
+        2    0.000    0.000    0.000    0.000 {method '__enter__' of '_multiprocessing.SemLock' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:847(__exit__)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\spawn.py:121(_check_not_importing_main)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\queues.py:34(Queue)
+        1    0.000    0.000    0.000    0.000 {method 'setimage' of 'ImagingDecoder' objects}
+        7    0.000    0.000    0.000    0.000 {method 'copy' of 'dict' objects}
+        9    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\tempfile.py:233(_get_candidate_names)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\process.py:85(<genexpr>)
+       13    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+        4    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:117(__init__)
+       10    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\popen_spawn_win32.py:54(<genexpr>)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\queue.py:27(Queue)
+        4    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\weakref.py:356(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:199(InspectLoader)
+        2    0.000    0.000    0.000    0.000 {method '__exit__' of '_multiprocessing.SemLock' objects}
+       11    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:719(create_module)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:831(load)
+        8    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:158(readable)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:348(Connection)
+        2    0.000    0.000    0.000    0.000 {built-in method nt.getcwd}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:202(Close)
+        6    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:134(_check_closed)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:268(PipeConnection)
+       11    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:909(get_filename)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:422(Listener)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:46(SemLock)
+       13    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:424(has_location)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\numeric.py:1858(isscalar)
+       24    0.000    0.000    0.000    0.000 {method 'bit_length' of 'int' objects}
+        7    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:345(ResourceReader)
+        2    0.000    0.000    0.000    0.000 {built-in method numpy.asanyarray}
+        2    0.000    0.000    0.000    0.000 {method 'index' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+        8    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\abc.py:7(abstractmethod)
+        2    0.000    0.000    0.000    0.000 {method 'getvalue' of '_io.BytesIO' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:988(poll)
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:262(_optim_args_from_interpreter_flags)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:534(height)
+        3    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:232(get_context)
+        2    0.000    0.000    0.000    0.000 {method 'release' of '_multiprocessing.SemLock' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\weakref.py:290(update)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:90(_make_methods)
+        1    0.000    0.000    0.000    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+        2    0.000    0.000    0.000    0.000 {method 'get' of 'mappingproxy' objects}
+        8    0.000    0.000    0.000    0.000 {built-in method _winapi.GetCurrentProcess}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\util.py:182(Finalize)
+        4    0.000    0.000    0.000    0.000 {method 'discard' of 'set' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:130(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:530(width)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:210(Condition)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\pkgutil.py:268(ImpLoader)
+        7    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:30(Finder)
+        8    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:163(writable)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\util.py:108(_platform_supports_abstract_sockets)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.repr}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:425(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:875(__del__)
+        5    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:538(size)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\process.py:90(_check_closed)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:629(PipeListener)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\popen_spawn_win32.py:39(Popen)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\util.py:266(LazyLoader)
+        1    0.000    0.000    0.000    0.000 {method 'setimage' of 'ImagingEncoder' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\ntpath.py:34(_get_bothseps)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\functools.py:67(wraps)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:248(get_start_method)
+        6    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\process.py:36(current_process)
+        2    0.000    0.000    0.000    0.000 {built-in method _imp.exec_dynamic}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1029(__init__)
+        4    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\collections\__init__.py:388(<genexpr>)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\reduction.py:43(register)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\queue.py:255(_PySimpleQueue)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\fromnumeric.py:70(<dictcomp>)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\PIL\Image.py:524(__getattr__)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:87(PathEntryFinder)
+        4    0.000    0.000    0.000    0.000 {method '__contains__' of 'frozenset' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\__init__.py:145(_DType_reduce)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\queues.py:286(JoinableQueue)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\queues.py:328(SimpleQueue)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\queue.py:220(PriorityQueue)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:183(ResourceLoader)
+        2    0.000    0.000    0.000    0.000 {method 'setter' of 'property' objects}
+        2    0.000    0.000    0.000    0.000 {method 'find' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\util.py:44(sub_debug)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:252(ExecutionLoader)
+        2    0.000    0.000    0.000    0.000 {method 'popitem' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\process.py:204(authkey)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:569(SocketListener)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\runpy.py:23(_TempModule)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\pkgutil.py:194(ImpImporter)
+        4    0.000    0.000    0.000    0.000 {method 'isidentifier' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\queue.py:239(LifoQueue)
+        3    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\util.py:48(debug)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\util.py:368(ForkAwareThreadLock)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\util.py:219(_LazyModule)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:136(Loader)
+        2    0.000    0.000    0.000    0.000 {method 'copy' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:1233(_internal_poll)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:196(get_start_method)
+        2    0.000    0.000    0.000    0.000 {method 'lstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method atexit.register}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:138(_check_readable)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:123(Semaphore)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:321(Event)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:298(SourceLoader)
+        1    0.000    0.000    0.000    0.000 {method 'pixel_access' of 'ImagingCore' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\context.py:186(get_context)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:755(ConnectionWrapper)
+        2    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\spawn.py:45(get_executable)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\runpy.py:46(_ModifiedArgv0)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:50(MetaPathFinder)
+        2    0.000    0.000    0.000    0.000 {method 'lower' of 'str' objects}
+        4    0.000    0.000    0.000    0.000 {method 'getbuffer' of '_winapi.Overlapped' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:231(_cleanup)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:1042(_get_handles)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\queue.py:22(Full)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\connection.py:777(XmlListener)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\util.py:385(ForkAwareLocal)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:142(BoundedSemaphore)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:159(Lock)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {built-in method sys._getframe}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\function_base.py:18(_linspace_dispatcher)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\synchronize.py:184(RLock)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\multiprocessing\popen_spawn_win32.py:22(_path_eq)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\runpy.py:160(_Error)
+        1    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.lock' objects}
+        1    0.000    0.000    0.000    0.000 {method 'count' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method sys.intern}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\multiarray.py:664(result_type)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\fromnumeric.py:2263(_any_dispatcher)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\core\fromnumeric.py:3123(_ndim_dispatcher)
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\importlib\abc.py:289(FileLoader)
+        1    0.000    0.000    0.000    0.000 {method 'release' of '_thread.lock' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\hilua\AppData\Local\Programs\Python\Python37\lib\subprocess.py:844(__enter__)
+
+
