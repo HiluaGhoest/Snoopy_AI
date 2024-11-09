@@ -3,6 +3,10 @@ import numpy as np
 import pyautogui
 import time
 import os
+from multiprocessing import Process, Queue, Pool
+import cProfile  # Import cProfile for profiling
+import pstats
+import subprocess
 
 def init_opencl():
     """Initialize OpenCL context"""
@@ -29,254 +33,334 @@ def preprocess_image_opencl(image):
     gpu_dilated = cv2.dilate(edges, kernel)
     return gpu_dilated
 
-def match_template_opencl(image, template, threshold=0.5):
-    """OpenCL-accelerated template matching"""
-    result = cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED)
-    return result
-
-def find_chat_boundaries(image, x, y, w, h, w_scale, h_scale):
-    """Find the actual boundaries of the chat window"""
-    # Convert region to grayscale
-    region = image[max(0, y-10):min(image.shape[0], y+h+10), max(0, x-10):min(image.shape[1], x+w+10)]
-    gray = cv2.cvtColor(region, cv2.COLOR_BGR2GRAY)
-    
-    # Apply edge detection
-    edges = cv2.Canny(gray, 50, 150)
-    
-    # Dilate edges to connect nearby lines
-    kernel = np.ones((3, 3), np.uint8)
-    dilated = cv2.dilate(edges, kernel, iterations=2)
-    
-    # Find contours
-    contours, _ = cv2.findContours(dilated, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    
-    if contours:
-        # Find the largest contour
-        largest_contour = max(contours, key=cv2.contourArea)
-        x_offset, y_offset, w_expanded, h_expanded = cv2.boundingRect(largest_contour)
-        
-        # Adjust coordinates back to full image space and apply scaling
-        return (
-            max(0, x-10) + x_offset,
-            max(0, y-10) + y_offset,
-            int(w_expanded * w_scale),  # Scale the width
-            int(h_expanded * h_scale)   # Scale the height
-        )
-    
-    return x, y, w, h
-
 def calculate_correction(scale):
-    """Calculate correction factor and offset based on scale."""
-    # Define correction constants
-    default_correction = 1.1  # Correction factor for less than 100%
-    max_correction = 0.70    # Correction factor for 140% and above
+    """Calculate correction factor and offset based on linear interpolation between 0%, 100%, and 140%,
+       and extrapolate for scales above 140%."""
+    
+    # Known correction values at 0%, 100%, and 140%
+    correction_50 = 2.4  # Example value for 0%
+    x_offset_50 = -40    # Example value for 0%
+    y_offset_50 = 0      # Example value for 0%
 
-    if scale < 100:  # For scales less than 100%
-        correction_factor = default_correction  # Default correction factor
-        x_offset = -20
-        y_offset = 0  # Assuming no offset for height in this case
-    elif 100 <= scale <= 140:  # For scales between 100% and 140%
-        # Linear interpolation between 100% and 140%
-        correction_factor = default_correction - ((default_correction - max_correction) / (140 - 100)) * (scale - 100)
-        x_offset = -20 + ((0 - (-20)) / (140 - 100)) * (scale - 100)
-        y_offset = 0  # Assuming no offset for height
-    else:  # For scales greater than 140%
-        # Extrapolate for scales above 140%
-        correction_factor = max_correction + (max_correction - default_correction) / (140 - 100) * (scale - 140)
-        x_offset = 20 * ((scale - 140) / 100)  # Example extrapolation for positive offset
-        y_offset = 0  # Adjust as needed for height offset above 140%
+    correction_100 = 1.0
+    x_offset_100 = -20
+    y_offset_100 = 0
 
-    return correction_factor, x_offset, y_offset
+    correction_140 = 0.7
+    x_offset_140 = 0
+    y_offset_140 = 0
 
+    # If scale is exactly 0%, 100%, or 140%
+    if scale == 50:
+        return correction_50, x_offset_50, y_offset_50
+    elif scale == 100:
+        return correction_100, x_offset_100, y_offset_100
+    elif scale == 140:
+        return correction_140, x_offset_140, y_offset_140
 
-def find_chat_on_screen(template_path, output_path, threshold=0.5):
-    try:
-        if not os.path.exists(template_path):
-            print(f"Template file not found: {template_path}")
-            return None
+    # Extrapolation for scales below 100%
+    if scale < 100:
+        # Calculate the scale fraction for extrapolation
+        scale_fraction = (scale - 50) / (100 - 50)
+        
+        # Interpolated values for below 100%
+        correction_factor = correction_50 + scale_fraction * (correction_100 - correction_50)
+        x_offset = x_offset_50 + scale_fraction * (x_offset_100 - x_offset_50)
+        y_offset = y_offset_50 + scale_fraction * (y_offset_100 - y_offset_50)
+        
+        return correction_factor, int(x_offset), int(y_offset)
 
-        # Capture screenshot
-        screenshot = pyautogui.screenshot()
-        screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
-        screenshot_orig = screenshot.copy()
-        screen_height, screen_width = screenshot.shape[:2]
+    # Linear interpolation between 100% and 140%
+    if scale <= 140:
+        scale_fraction = (scale - 100) / (140 - 100)
+        
+        # Interpolated values for between 100% and 140%
+        correction_factor = correction_100 + scale_fraction * (correction_140 - correction_100)
+        x_offset = x_offset_100 + scale_fraction * (x_offset_140 - x_offset_100)
+        y_offset = y_offset_100 + scale_fraction * (y_offset_140 - y_offset_100)
 
-        # Load template
-        template = cv2.imread(template_path)
+        return correction_factor, int(x_offset), int(y_offset)
+
+    # Extrapolation for scales above 140%
+    if scale > 140:
+        # Calculate the scale fraction for extrapolation above 140%
+        scale_fraction = (scale - 140) / (160 - 140)  # Using 160 as a hypothetical reference for extrapolation
+        
+        # Calculate extrapolated values based on the trend from 100% to 140%
+        correction_factor = correction_140 + scale_fraction * (correction_140 - correction_100)
+        x_offset = x_offset_140 + scale_fraction * (x_offset_140 - x_offset_100)
+        y_offset = y_offset_140 + scale_fraction * (y_offset_140 - y_offset_100)
+
+        return correction_factor, int(x_offset), int(y_offset)
+
+def load_templates(template_paths):
+    """Load multiple templates and prepare for caching scaled images."""
+    templates = {}
+    for name, path in template_paths.items():
+        template = cv2.imread(path, cv2.IMREAD_UNCHANGED)
         if template is None:
-            print(f"Failed to load template: {template_path}")
-            return None
-        template_height, template_width = template.shape[:2]
+            print(f"Failed to load template: {path}. Please check the file path and ensure the file exists.")
+            continue
+        
+        # Check if the image has an alpha channel
+        if template.shape[-1] == 4:
+            # Separate the alpha channel
+            b, g, r, alpha = cv2.split(template)
+            mask = alpha > 0  # Create mask from alpha channel
+            template = cv2.merge((b, g, r))  # Remove alpha for template matching
+        else:
+            mask = None  # No mask needed if there's no transparency
+        
+        templates[name] = {
+            'image': template,
+            'mask': mask,
+            'height': template.shape[0],
+            'width': template.shape[1],
+        }
+    return templates
 
-        # Process images with OpenCL
-        gpu_screenshot_proc = preprocess_image_opencl(screenshot)
-        gpu_template_proc = preprocess_image_opencl(template)
+def scale_template(template, scales):
+    """Scale the template to various sizes and return a dictionary of scaled images."""
+    scaled_templates = {}
+    for scale in scales:
+        scaled_image = cv2.resize(template, None, fx=scale, fy=scale, interpolation=cv2.INTER_LINEAR)
+        scaled_templates[scale] = scaled_image
+    return scaled_templates
 
-        # Define scaling ranges
-        width_scales = np.linspace(0.5, 2.0, 8)
-        height_scales = np.linspace(0.5, 2.0, 8)
-
-        matches = []
-
-        for w_scale in width_scales:
-            for h_scale in height_scales:
-                resized_width = int(template_width * w_scale)
-                resized_height = int(template_height * h_scale)
-
-                if resized_height > screen_height or resized_width > screen_width:
-                    continue
-
-                try:
-                    # Resize template
-                    gpu_resized_template = cv2.resize(
-                        gpu_template_proc, 
-                        (resized_width, resized_height)
-                    )
-
-                    # Match template
-                    result = match_template_opencl(
-                        gpu_screenshot_proc,
-                        gpu_resized_template,
-                        threshold
-                    )
-                    # Initialize locations to an empty tuple
-                    locations = (np.array([]), np.array([]))
-
-                    # Match template
-                    result = match_template_opencl(
-                        gpu_screenshot_proc,
-                        gpu_resized_template,
-                        threshold
-                    )
-
-                    result_cpu = result.get()
-                    locations = np.where(result_cpu >= threshold)
-
-                    # Check if there are any locations found
-                    if locations[0].size > 0:  # If there are any matches
-                        for y, x in zip(*locations):
-                            # Find actual chat boundaries with scaling factors
-                            actual_x, actual_y, actual_w, actual_h = find_chat_boundaries(
-                                screenshot_orig,
-                                x,
-                                y,
-                                resized_width,
-                                resized_height,
-                                w_scale,
-                                h_scale
-                            )
-
-                            matches.append({
-                                'position': (actual_x, actual_y),
-                                'width_scale': w_scale,
-                                'height_scale': h_scale,
-                                'confidence': result_cpu[y, x],
-                                'size': (actual_w, actual_h)
-                            })
-
-                except cv2.error as e:
-                    print(f"OpenCV error during template matching: {e}")
-                    continue
-
-        # In the find_chat_on_screen function
-        if matches:
-            matches.sort(key=lambda x: x['confidence'], reverse=True)
-
-            match = matches[0]
-            actual_x, actual_y = match['position']
-            actual_w, actual_h = match['size']
-
-            # Get the correction factor and offsets based on the last scales used
-            current_scale = int(match['width_scale'] * 100)  # Use the last matched width scale
-            correction_factor, x_offset, y_offset = calculate_correction(current_scale)
-
-            # Calculate adjusted width and height using the correction factor
-            adjusted_w = int(actual_w * correction_factor)
-            adjusted_h = int(actual_h * correction_factor)
-
-            # Adjust the position with the x and y offsets
-            actual_x = int(actual_x + x_offset)
-            actual_y = int(actual_y + y_offset)
-
-            # Ensure the rectangle does not exceed image boundaries
-            adjusted_w = min(adjusted_w, screenshot_orig.shape[1] - actual_x)
-            adjusted_h = min(adjusted_h, screenshot_orig.shape[0] - actual_y)
-
-            # Ensure that all values used are integers
-            actual_x = max(0, actual_x)
-            actual_y = max(0, actual_y)
-            adjusted_w = max(1, adjusted_w)  # Minimum width of 1 pixel
-            adjusted_h = max(1, adjusted_h)  # Minimum height of 1 pixel
-
-            # Draw the adjusted rectangle
-            cv2.rectangle(
-                screenshot_orig,
-                (actual_x, actual_y),
-                (actual_x + adjusted_w, actual_y + adjusted_h),
-                (0, 255, 0),
-                2
-            )
-
-            # Add confidence text
-            cv2.putText(
-                screenshot_orig,
-                f"Conf: {match['confidence']:.2f}",
-                (actual_x, actual_y - 10),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.5,
-                (0, 255, 0),
-                2
-            )
-
-            # Print the adjusted values for debugging
-            print(f"Scale: {current_scale}%")
-            print(f"Actual Width: {actual_w}, Actual Height: {actual_h}")
-            print(f"Adjusted Width: {adjusted_w}, Adjusted Height: {adjusted_h}")
-            print(f"Adjusted X Offset: {x_offset}, Adjusted Y Offset: {y_offset}")
-
-            cv2.imwrite(output_path, screenshot_orig)
-            print(f"Found match with confidence: {match['confidence']:.2f}")
-
-
-
-
+def load_template_with_alpha(path):
+    """Load a template image with transparency."""
+    template = cv2.imread(path, cv2.IMREAD_UNCHANGED)  # Load with alpha channel
+    if template is None:
+        print(f"Failed to load template: {path}")
         return None
 
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    # Split the template into its color and alpha channels
+    b, g, r, alpha = cv2.split(template)
+
+    # Create a mask using the alpha channel
+    mask = alpha > 0  # Create a binary mask where the alpha channel is greater than 0
+    return cv2.merge((b, g, r)), mask  # Return the BGR image and mask
+
+
+def find_fixed_images(templates, screenshot, scales, threshold=0.3, early_stop_threshold=0.9):
+    """Locate fixed images in the screenshot for one specific template using cached scaled images."""
+    matches = {}
+    cache = {}  # Cache for scaled images
+    
+    for name, template_data in templates.items():
+        template = template_data['image']
+        mask = template_data['mask']
+        
+        # Pre-load scaled images for the current template if not cached
+        if name not in cache:
+            cache[name] = scale_template(template, scales)
+
+        for scale in scales:
+            resized_template = cache[name][scale]
+            resized_mask = cv2.resize(mask.astype(np.uint8), None, fx=scale, fy=scale, interpolation=cv2.INTER_LINEAR)
+
+            # Perform template matching using the resized template
+            result = cv2.matchTemplate(screenshot, resized_template, cv2.TM_CCOEFF_NORMED, mask=resized_mask)
+            locations = np.where(result >= threshold)
+
+            if locations[0].size > 0:
+                for y, x in zip(locations[0], locations[1]):
+                    score = result[y, x]
+                    reliability = score * (np.sum(mask) / mask.size if mask is not None else 1)
+
+                    # Check if reliability is valid
+                    if reliability != float('inf') and reliability == reliability:
+                        matches.setdefault(name, []).append((x, y, scale, reliability)) 
+
+                        # Early stopping condition based on reliability
+                        if reliability >= early_stop_threshold:  
+                            print(f"Early stopping for {name} at scale {scale} with reliability {reliability:.2f}")
+                            break
+
+                # If a sufficient match has been found, we can break out of the scale loop early
+                if name in matches and any(m[3] >= early_stop_threshold for m in matches[name]):
+                    break
+
+    return matches
+
+def worker(template_data, screenshot, scales, output_queue):
+    """Worker function for processing template matching."""
+    matches = {}
+    # Process the screenshot with the provided template data and scales
+    matches.update(find_fixed_images(template_data, screenshot, scales))
+    # Send the results back to the output queue
+    output_queue.put(matches)
+
+
+
+def calculate_chat_boundaries(matches):
+    """Calculate the bounding rectangle for the chat window based on found image positions."""
+    if len(matches) != 2:
+        print("Both fixed images must be found to calculate boundaries.")
         return None
+
+    # Certifique-se de que você está pegando a tupla correta
+    top_left = matches['chat_window_top_left']  # Obter a melhor correspondência para top_left
+    bottom_right = matches['chat_window_bottom_right']  # Obter a melhor correspondência para bottom_right
+
+    # Assegure-se de que top_left e bottom_right são tuplas com pelo menos 4 elementos
+    if len(top_left) < 4 or len(bottom_right) < 4:
+        print("Error: Matches do not have the expected format.")
+        return None
+
+    # Calcule as coordenadas do retângulo
+    x1, y1 = top_left[0], top_left[1]
+    x2 = bottom_right[0]
+    y2 = bottom_right[1]
+
+    return (x1, y1, x2 - x1, y2 - y1)  # (x, y, largura, altura)
+
+
+
+def calculate_combined_rectangle(top_left, bottom_right):
+    """Calculate a new rectangle based on top_left and bottom_right coordinates."""
+    x1, y1 = top_left
+    x2, y2 = bottom_right
+    
+    # Calculate width and height
+    width = x2 - x1
+    height = y2 - y1
+    
+    # Create the new rectangle (x, y, width, height)
+    combined_rectangle = (x1, y1, width, height)
+    
+    return combined_rectangle
+
 
 def main():
     if not init_opencl():
         print("OpenCL acceleration not available. Exiting...")
         return
 
-    if not os.path.exists('templates'):
-        os.makedirs('templates')
-
+    # Define the paths for templates
     template_paths = {
-        'chat_window': 'templates/chat_template.png',
+        'chat_window_top_left': 'templates/top_left.png',
+        'chat_window_bottom_right': 'templates/bottom_right.png',
     }
+    
+    # Load templates
+    templates = load_templates(template_paths)
+    scales = np.linspace(0.75, 2.0, num=7)  # Scales for template matching
+    output_path = 'chat_detection_output.png'  # Ensure this path is writable
 
-    output_path = 'chat_detection_output.png'
+    # Initialize output queue
+    output_queue = Queue()
+    print("Starting multi-scale detection...")
 
-    print("Starting OpenCL-accelerated chat detection...")
+    # Create a pool of processes upfront
+    processes = []
+    
     try:
-        while True:
-            for template_name, template_path in template_paths.items():
-                start_time = time.time()
-                match = find_chat_on_screen(template_path, output_path)
-                end_time = time.time()
+        # Capture screenshot once
+        screenshot = pyautogui.screenshot()
+        screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+
+        # Create and start processes for each template
+        for name in templates:
+            p = Process(target=worker, args=({name: templates[name]}, screenshot, scales, output_queue))
+            processes.append(p)
+            p.start()
+
+        # Collect results from the output queue
+        all_matches = {}
+        for _ in processes:
+            matches = output_queue.get()  # Collect results from each worker
+            all_matches.update(matches)
+
+        # Wait for all processes to finish
+        for p in processes:
+            p.join()
+
+        # Clear the processes list
+        processes.clear()
+
+        if all_matches:
+            best_matches = {}
+
+            # Find the best match for bottom_right and top_left
+            for name, found_matches in all_matches.items():
+                if name in ['chat_window_bottom_right', 'chat_window_top_left']:
+                    found_matches.sort(key=lambda x: x[3], reverse=True)  # Sort by reliability
+                    best_match = found_matches[0]  # Get the best match
+                    best_matches[name] = best_match  # Store the best match
+
+            # Calcular os novos retângulos usando os melhores matches
+            if 'chat_window_top_left' in best_matches and 'chat_window_bottom_right' in best_matches:
+
+                top_x, top_y, top_scale, top_reliability = best_matches['chat_window_top_left']
+                top_width = int(templates['chat_window_top_left']['width'] * top_scale)
+                top_height = int(templates['chat_window_top_left']['height'] * top_scale)
+
+                bottom_x, bottom_y, bottom_scale, bottom_reliability = best_matches['chat_window_bottom_right']
+                bottom_width = int(templates['chat_window_bottom_right']['width'] * bottom_scale)
+                bottom_height = int(templates['chat_window_bottom_right']['height'] * bottom_scale)
+
+                x1_chat = top_x
+                y1_chat = top_y
+                x2_chat = (bottom_x + bottom_width)
+                y2_chat = (bottom_y + bottom_height)
+
+                cv2.rectangle(screenshot, (x1_chat - top_width, y1_chat - top_height), (x2_chat + bottom_width, y2_chat + bottom_height), (0, 255, 0), 2) # outer area
+
+                x1_text = top_x
+                y1_text = (top_y + top_height)
+                x2_text = (bottom_x + bottom_width)
+                y2_text = bottom_y
+
+                cv2.rectangle(screenshot, (x1_text, y1_text), (x2_text, y2_text), (0, 0, 255), 2) # inter area
+
                 
-                if match:
-                    print(f"Found {template_name}! Processing time: {(end_time - start_time) * 1000:.2f}ms")
-                
-            time.sleep(0.01)
+                cv2.rectangle(screenshot, (top_x, top_y), ((top_x + top_width), (top_y + top_height)), (255, 255, 0), 2)
+                cv2.rectangle(screenshot, (bottom_x, bottom_y), ((bottom_x + bottom_width), (bottom_y + bottom_height)), (255, 255, 0), 2)
+
+                # Chamar o segundo script para captura
+                import subprocess
+
+                # Rectangle bounds as a string
+                bounds_args = f"{x1_chat - top_width},{y1_chat - top_height},{x2_chat + bottom_width},{y2_chat + bottom_height} " \
+                            f"{x1_text},{y1_text},{x2_text},{y2_text}"
+
+                # Call another script with bounds as arguments
+                subprocess.run(['python', 'screenshot_capture.py'] + bounds_args.split())
+
+
+                cv2.imwrite('chat_detection_output.png', screenshot)
+
+            else:
+                print(f"Failed to save the output image to {output_path}")
+        else:
+            print("No matches found.")
 
     except KeyboardInterrupt:
         print("\nProgram terminated by user")
+        
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+        
+    finally:
+        # Ensure all processes are properly terminated
+        for p in processes:
+            p.join()  # Wait for all processes to finish
 
 if __name__ == "__main__":
-    main()
+    # Create a Profile object
+    profiler = cProfile.Profile()
+    profiler.enable()  # Start profiling
+
+    try:
+        main()  # Run your main function
+    finally:
+        profiler.disable()  # Stop profiling
+        # Save profiling results to a file
+        profiler.dump_stats("profile_results.prof")
+
+    # Optionally, you can print stats to the console
+    with open("profile_output.txt", "w") as f:
+        ps = pstats.Stats("profile_results.prof", stream=f)
+        ps.sort_stats("cumulative")  # You can sort by different criteria, e.g., "time", "cumulative"
+        ps.print_stats()
