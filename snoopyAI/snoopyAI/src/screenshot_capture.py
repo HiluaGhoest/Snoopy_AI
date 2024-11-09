@@ -16,7 +16,7 @@ print("Outer Bounds:", outer_bounds)
 print("Inner Bounds:", inner_bounds)
 
 # Define the bounds of the outer area
-x1, y1, x2, y2 = outer_bounds  # These should be your calculated bounds
+x1, y1, x2, y2 = outer_bounds
 
 # Capture the screenshot within the outer bounds
 screenshot = pyautogui.screenshot(region=(x1, y1, x2 - x1, y2 - y1))
@@ -59,7 +59,7 @@ screenshot_display = cv2.cvtColor(screenshot_np, cv2.COLOR_BGR2RGB)
 # Optionally save the result
 cv2.imwrite('detected_templates.png', screenshot_np)
 
-# Perform template matching (as shown earlier)
+# Perform template matching
 template1_found = max_val1 >= threshold
 template2_found = max_val2 >= threshold
 

@@ -4,7 +4,7 @@ import pyautogui
 import time
 import os
 from multiprocessing import Process, Queue, Pool
-import cProfile  # Import cProfile for profiling
+import cProfile
 import pstats
 import subprocess
 
@@ -37,10 +37,10 @@ def calculate_correction(scale):
     """Calculate correction factor and offset based on linear interpolation between 0%, 100%, and 140%,
        and extrapolate for scales above 140%."""
     
-    # Known correction values at 0%, 100%, and 140%
-    correction_50 = 2.4  # Example value for 0%
-    x_offset_50 = -40    # Example value for 0%
-    y_offset_50 = 0      # Example value for 0%
+    # Known correction values at 50%, 100%, and 140%
+    correction_50 = 2.4  
+    x_offset_50 = -40    
+    y_offset_50 = 0      
 
     correction_100 = 1.0
     x_offset_100 = -20
@@ -199,21 +199,21 @@ def calculate_chat_boundaries(matches):
         print("Both fixed images must be found to calculate boundaries.")
         return None
 
-    # Certifique-se de que você está pegando a tupla correta
-    top_left = matches['chat_window_top_left']  # Obter a melhor correspondência para top_left
-    bottom_right = matches['chat_window_bottom_right']  # Obter a melhor correspondência para bottom_right
+    # Ensure you are getting the correct tuple
+    top_left = matches['chat_window_top_left']  # Get the best match for top_left
+    bottom_right = matches['chat_window_bottom_right']  # Get the best match for bottom_right
 
-    # Assegure-se de que top_left e bottom_right são tuplas com pelo menos 4 elementos
+    # Ensure top_left and bottom_right are tuples with at least 4 elements
     if len(top_left) < 4 or len(bottom_right) < 4:
         print("Error: Matches do not have the expected format.")
         return None
 
-    # Calcule as coordenadas do retângulo
+    # Calculate the rectangle coordinates
     x1, y1 = top_left[0], top_left[1]
     x2 = bottom_right[0]
     y2 = bottom_right[1]
 
-    return (x1, y1, x2 - x1, y2 - y1)  # (x, y, largura, altura)
+    return (x1, y1, x2 - x1, y2 - y1)  # (x, y, width, height)
 
 
 
@@ -289,7 +289,7 @@ def main():
                     best_match = found_matches[0]  # Get the best match
                     best_matches[name] = best_match  # Store the best match
 
-            # Calcular os novos retângulos usando os melhores matches
+            # Calculate new rectangles using the best matches
             if 'chat_window_top_left' in best_matches and 'chat_window_bottom_right' in best_matches:
 
                 top_x, top_y, top_scale, top_reliability = best_matches['chat_window_top_left']
@@ -314,11 +314,11 @@ def main():
 
                 cv2.rectangle(screenshot, (x1_text, y1_text), (x2_text, y2_text), (0, 0, 255), 2) # inter area
 
-                
+                        
                 cv2.rectangle(screenshot, (top_x, top_y), ((top_x + top_width), (top_y + top_height)), (255, 255, 0), 2)
                 cv2.rectangle(screenshot, (bottom_x, bottom_y), ((bottom_x + bottom_width), (bottom_y + bottom_height)), (255, 255, 0), 2)
 
-                # Chamar o segundo script para captura
+                # Call the second script for capture
                 import subprocess
 
                 # Rectangle bounds as a string
@@ -328,9 +328,7 @@ def main():
                 # Call another script with bounds as arguments
                 subprocess.run(['python', 'screenshot_capture.py'] + bounds_args.split())
 
-
                 cv2.imwrite('chat_detection_output.png', screenshot)
-
             else:
                 print(f"Failed to save the output image to {output_path}")
         else:
@@ -353,7 +351,7 @@ if __name__ == "__main__":
     profiler.enable()  # Start profiling
 
     try:
-        main()  # Run your main function
+        main()  # Run main function
     finally:
         profiler.disable()  # Stop profiling
         # Save profiling results to a file
